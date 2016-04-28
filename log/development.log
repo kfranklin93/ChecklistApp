@@ -8545,3 +8545,204 @@ Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323
             FROM sqlite_temp_master
             WHERE name='index_users_on_email' AND type='index'
 
+  [1m[36m (34.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (14.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateItems (20150512212245)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (27.0ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (11.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150512212245"]]
+  [1m[36m (6.1ms)[0m  [1mCOMMIT[0m
+Migrating to AddDescriptionToItems (20150512215015)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (18.1ms)[0m  [1mALTER TABLE "items" ADD "description" text[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150512215015"]]
+  [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
+Migrating to DeviseCreateUsers (20150512221436)
+  [1m[35m (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/drmikeh/Dropbox/ga/wdi-instructor/cohorts/06-spring-2016/students/kenan/ChecklistApp/db/migrate/20150512221436_devise_create_users.rb:34)
+  [1m[36m (24.8ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.1ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")
+  [1m[36m (1.8ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150512221436"]]
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddUserIdToItems (20150512222555)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "items" ADD "user_id" integer[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150512222555"]]
+  [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+Migrating to AddCompletedAtToItems (20150513114201)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "items" ADD "completed_at" timestamp[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150513114201"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'items'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+
+
+Started GET "/" for ::1 at 2016-04-28 15:45:31 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ItemsController#index as HTML
+  Rendered items/_static_landing_page.html.erb (0.9ms)
+  Rendered items/index.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 3563ms (Views: 3549.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2016-04-28 15:45:34 -0400
+Processing by ItemsController#index as HTML
+  Rendered items/_static_landing_page.html.erb (0.3ms)
+  Rendered items/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-94dfb1c421ab2f415a8488014bd208d8acf5c3a3b303f966b815cb86e02ff102.css?body=1" for ::1 at 2016-04-28 15:45:34 -0400
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-04-28 15:45:34 -0400
+
+
+Started GET "/assets/items.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-04-28 15:45:34 -0400
+
+
+Started GET "/assets/bootstrap/alert.self-15ce09eba576e56db3edfd87accc0ff48823df915169e350b4fd97290f96aee1.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/affix.self-68d1a5161d04ca9fe1b9d9f4114d9426c7798bf90f2703a97aca35c8113469bb.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/button.self-37c62bff1d75f86f3348b8679873d5156d8b9938b62841038dca21690f4740f1.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/collapse.self-eeece00cd06a3d7cc071ab7845b549d4991edd0f0895e4be70fe40bac2fb5f4b.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/modal.self-f2759e138605770e60526c00c6d86cbb3378da203641f9d6b204c9f0192b9267.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/scrollspy.self-5ea180afe4404f83fc97d997833f2edefd34475b0b5ddab310e27abc2bbd5f2f.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/tab.self-e1bba7115c90301056ee94c4716de2fcbe4498015def2dab9ff9879f339bd245.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/transition.self-7742dca5e6acf313fbb217811b48468282cddf1a9baea5c89ec92e367ef242cb.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/tooltip.self-c3b5c16f394ab9c0391db4431aac4f2d2ddf1bba4c5d3228ed343de05ecc8e83.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap/popover.self-2674d99c3ab0415dba0b958a80b3840f70ff6368b155d890306c0291be49453b.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+
+
+Started GET "/assets/items.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-04-28 15:45:35 -0400
+  [1m[36mUser Load (2.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+
+
+Started GET "/users/sign_up" for ::1 at 2016-04-28 15:46:11 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (2.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (203.9ms)
+Completed 200 OK in 309ms (Views: 295.0ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/users" for ::1 at 2016-04-28 15:46:22 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UIFfL3iB+BVY6WEPvrpbivh+GiUSrpuw14txNrNp+QBuddJ+yVOHkkhmX9BbzKjNGSpweAbKW4HUQoDoMTHjRg==", "user"=>{"email"=>"drmikeh@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (10.9ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'drmikeh@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (17.8ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["email", "drmikeh@gmail.com"], ["encrypted_password", "$2a$10$LPT8JwvuuyuGR7ACDPSqOeKvJairkQeIhFBFpJlxGf7Or2aSlH9Ri"], ["created_at", "2016-04-28 19:46:22.340213"], ["updated_at", "2016-04-28 19:46:22.340213"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["last_sign_in_at", "2016-04-28 19:46:22.363634"], ["current_sign_in_at", "2016-04-28 19:46:22.363634"], ["last_sign_in_ip", "::1"], ["current_sign_in_ip", "::1"], ["sign_in_count", 1], ["updated_at", "2016-04-28 19:46:22.365174"], ["id", 1]]
+  [1m[35m (11.6ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 198ms (ActiveRecord: 43.1ms)
+
+
+Started GET "/" for ::1 at 2016-04-28 15:46:22 -0400
+Processing by ItemsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mItem Load (2.7ms)[0m  SELECT "items".* FROM "items" WHERE "items"."user_id" = $1  ORDER BY created_at DESC  [["user_id", 1]]
+  Rendered items/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 90ms (Views: 74.8ms | ActiveRecord: 3.9ms)
+  [1m[35mUser Load (0.7ms)[0m  SELECT "users".* FROM "users"
+
+
+Started GET "/items/new" for ::1 at 2016-04-28 15:46:35 -0400
+Processing by ItemsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered items/_form.html.erb (46.8ms)
+  Rendered items/new.html.erb within layouts/application (50.5ms)
+Completed 200 OK in 141ms (Views: 105.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/items" for ::1 at 2016-04-28 15:47:04 -0400
+Processing by ItemsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RjiLGDmcxqU2yGnhQQMM4BzhLJyPozxjGJqvi5Fq0t54zAZJiE65IiZHVz6kdf+n/bVGwZvH/FIbU15VEzLImA==", "item"=>{"title"=>"Flowers", "description"=>"Need some nice flowers"}, "commit"=>"Create Item"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "items" ("title", "description", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Flowers"], ["description", "Need some nice flowers"], ["user_id", 1], ["created_at", "2016-04-28 19:47:04.555949"], ["updated_at", "2016-04-28 19:47:04.555949"]]
+  [1m[36m (6.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 15ms (ActiveRecord: 7.7ms)
+
+
+Started GET "/" for ::1 at 2016-04-28 15:47:04 -0400
+Processing by ItemsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mItem Load (0.2ms)[0m  [1mSELECT "items".* FROM "items" WHERE "items"."user_id" = $1  ORDER BY created_at DESC[0m  [["user_id", 1]]
+  Rendered items/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 55ms (Views: 53.0ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/items/1/complete" for ::1 at 2016-04-28 15:47:16 -0400
+Processing by ItemsController#complete as HTML
+  Parameters: {"authenticity_token"=>"Y8xj6W1K0t3FEywu70b1BWOEGcziFkZkP6O/GBhntBddOO643JitWtWcEvEKMAZCgtBzkfZyhlU8ak7Gmj+uUQ==", "id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mItem Load (0.2ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "items" SET "completed_at" = $1, "updated_at" = $2 WHERE "items"."id" = $3[0m  [["completed_at", "2016-04-28 19:47:16.732274"], ["updated_at", "2016-04-28 19:47:16.732784"], ["id", 1]]
+  [1m[35m (5.7ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 14ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/" for ::1 at 2016-04-28 15:47:16 -0400
+Processing by ItemsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mItem Load (0.2ms)[0m  SELECT "items".* FROM "items" WHERE "items"."user_id" = $1  ORDER BY created_at DESC  [["user_id", 1]]
+  Rendered items/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 51ms (Views: 49.2ms | ActiveRecord: 0.5ms)
+  [1m[36mItem Load (1.0ms)[0m  [1mSELECT "items".* FROM "items"[0m
